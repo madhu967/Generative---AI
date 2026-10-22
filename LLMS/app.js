@@ -6,6 +6,42 @@ const preview = document.querySelector("#attachmentPreview");
 const fileName = document.querySelector("#fileName");
 let previousInteractionId;
 let selectedFile;
+const conversationList = document.querySelector("#conversationList");
+const profileMenu = document.querySelector("#profileMenu");
+const savedConversations = JSON.parse(localStorage.getItem("cognivo-conversations") || "[]");
+
+function renderConversations() {
+  conversationList.innerHTML = "";
+  savedConversations.slice(0, 7).forEach((conversation, index) => {
+    const button = document.createElement("button");
+    button.className = "conversation-item";
+    button.textContent = conversation.title;
+    button.title = conversation.title;
+    button.addEventListener("click", () => loadConversation(index));
+    conversationList.append(button);
+  });
+}
+
+function saveConversation(title) {
+  const existing = savedConversations.findIndex((item) => item.title === title);
+  const conversation = { title, interactionId: previousInteractionId };
+  if (existing >= 0) savedConversations.splice(existing, 1);
+  savedConversations.unshift(conversation);
+  localStorage.setItem("cognivo-conversations", JSON.stringify(savedConversations));
+  renderConversations();
+}
+
+function loadConversation(index) {
+  previousInteractionId = savedConversations[index].interactionId;
+  messages.innerHTML = "";
+  const welcome = document.createElement("div");
+  welcome.className = "welcome";
+  welcome.innerHTML = '<div class="welcome-orb">✣</div><h2></h2><p>Continue this saved conversation below.</p>';
+  welcome.querySelector("h2").textContent = savedConversations[index].title;
+  messages.append(welcome);
+}
+
+renderConversations();
 
 function addMessage(text, role) {
   document.querySelector(".welcome")?.remove();
@@ -58,6 +94,7 @@ async function sendMessage(message) {
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || "Request failed.");
     previousInteractionId = data.interactionId;
+    saveConversation(message);
     addMessage(data.text, "assistant");
   } catch (error) {
     addMessage(`Sorry, I couldn't reply. ${error.message}`, "assistant");
@@ -90,4 +127,14 @@ document.querySelector("#newChatButton").addEventListener("click", () => {
 });
 document.querySelector("#clearButton").addEventListener("click", () => {
   document.querySelector("#newChatButton").click();
+});
+document.querySelector("#savedChatsButton").addEventListener("click", () => {
+  conversationList.classList.toggle("expanded");
+  conversationList.scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
+document.querySelector("#profileButton").addEventListener("click", () => {
+  profileMenu.classList.toggle("hidden");
+});
+document.querySelector("#profileSettings").addEventListener("click", () => {
+  profileMenu.querySelector("span").textContent = "Profile saved locally";
 });

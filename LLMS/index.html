@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nova Chat</title>
+    <title>Aurails AI Chatbot</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,18 +15,25 @@
   <body>
     <main class="app-shell">
       <aside class="sidebar">
-        <div class="brand"><span class="brand-mark">✦</span><span>nova</span></div>
+        <div class="brand"><span class="brand-mark">✣</span><span>Cognivo</span></div>
         <button class="new-chat" id="newChatButton"><span>＋</span> New chat</button>
         <div class="side-label">Workspace</div>
         <nav>
           <a class="nav-item active" href="#"><span>◈</span> Assistant</a>
-          <a class="nav-item" href="#"><span>◌</span> Saved chats</a>
+          <button class="nav-item" id="savedChatsButton"><span>◌</span> Saved chats</button>
         </nav>
+        <div class="side-label recent-label">Recent conversations</div>
+        <div class="conversation-list" id="conversationList"></div>
         <div class="sidebar-bottom">
-          <div class="profile">
+          <button class="profile" id="profileButton" type="button">
             <div class="profile-avatar">M</div>
             <div><strong>Madhu</strong><small>Personal workspace</small></div>
             <span class="more">•••</span>
+          </button>
+          <div class="profile-menu hidden" id="profileMenu">
+            <strong>Madhu Venkat</strong>
+            <span>Free workspace</span>
+            <button type="button" id="profileSettings">Profile settings</button>
           </div>
         </div>
       </aside>
@@ -35,7 +42,7 @@
         <header class="topbar">
           <div class="bot-heading">
             <div class="bot-avatar"><img src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?auto=format&fit=crop&w=100&q=80" alt="" /></div>
-            <div><h1>Nova Assistant</h1><span><i></i> Online · Gemini</span></div>
+            <div><h1>Cognivo Core</h1><span><i></i> Online · Gemini</span></div>
           </div>
           <button class="icon-button" id="clearButton" title="Clear conversation">⌫</button>
         </header>
@@ -43,12 +50,12 @@
         <div class="messages" id="messages">
           <div class="welcome">
             <div class="welcome-orb">✦</div>
-            <h2>How can I help today?</h2>
-            <p>Ask anything, brainstorm ideas, or upload an image to get started.</p>
+            <h2>Let’s start a smart conversation</h2>
+            <p>Ask anything, explore ideas, or create something brilliant.</p>
             <div class="suggestions">
-              <button data-prompt="Help me plan my day">Plan my day <span>↗</span></button>
-              <button data-prompt="Give me three creative ideas">Creative ideas <span>↗</span></button>
-              <button data-prompt="Explain something to me simply">Explain simply <span>↗</span></button>
+              <button data-prompt="Summarize my task and give me a plan">Summarize task <span>↗</span></button>
+              <button data-prompt="Give me three creative ideas">Creative thinking <span>↗</span></button>
+              <button data-prompt="Explain this topic simply">Answer questions <span>↗</span></button>
             </div>
           </div>
         </div>
