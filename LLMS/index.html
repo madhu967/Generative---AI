@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova Chat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="brand"><span class="brand-mark">✦</span><span>nova</span></div>
+        <button class="new-chat" id="newChatButton"><span>＋</span> New chat</button>
+        <div class="side-label">Workspace</div>
+        <nav>
+          <a class="nav-item active" href="#"><span>◈</span> Assistant</a>
+          <a class="nav-item" href="#"><span>◌</span> Saved chats</a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="profile">
+            <div class="profile-avatar">M</div>
+            <div><strong>Madhu</strong><small>Personal workspace</small></div>
+            <span class="more">•••</span>
+          </div>
+        </div>
+      </aside>
+
+      <section class="chat-panel">
+        <header class="topbar">
+          <div class="bot-heading">
+            <div class="bot-avatar"><img src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?auto=format&fit=crop&w=100&q=80" alt="" /></div>
+            <div><h1>Nova Assistant</h1><span><i></i> Online · Gemini</span></div>
+          </div>
+          <button class="icon-button" id="clearButton" title="Clear conversation">⌫</button>
+        </header>
+
+        <div class="messages" id="messages">
+          <div class="welcome">
+            <div class="welcome-orb">✦</div>
+            <h2>How can I help today?</h2>
+            <p>Ask anything, brainstorm ideas, or upload an image to get started.</p>
+            <div class="suggestions">
+              <button data-prompt="Help me plan my day">Plan my day <span>↗</span></button>
+              <button data-prompt="Give me three creative ideas">Creative ideas <span>↗</span></button>
+              <button data-prompt="Explain something to me simply">Explain simply <span>↗</span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="composer-wrap">
+          <div class="attachment-preview hidden" id="attachmentPreview">
+            <span>▧</span><span id="fileName"></span><button id="removeFile" type="button">×</button>
+          </div>
+          <form class="composer" id="chatForm">
+            <label class="attach-button" title="Upload an image">＋<input id="fileInput" type="file" accept="image/*" /></label>
+            <textarea id="messageInput" rows="1" placeholder="Message Nova..." autocomplete="off"></textarea>
+            <button class="send-button" type="submit" aria-label="Send message">↑</button>
+          </form>
+          <p class="composer-note">Nova can make mistakes. Check important information.</p>
+        </div>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
